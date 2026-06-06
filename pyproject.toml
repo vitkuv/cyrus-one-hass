@@ -17,6 +17,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
     "pytest-homeassistant-custom-component>=0.13",
+    "aiousbwatcher>=1.1.2",
 ]
 
 [tool.pytest.ini_options]
@@ -58,6 +59,7 @@ lint.ignore = [
     "D107",
     "D203",
 ]
+lint.fixable = ["ALL"]
 
 exclude = [
     ".git",
@@ -68,7 +70,6 @@ exclude = [
     "*.pyc",
     "*.egg-info",
 ]
-lint.fixable = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
