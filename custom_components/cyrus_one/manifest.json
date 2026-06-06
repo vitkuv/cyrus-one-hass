@@ -1,22 +1,22 @@
 {
   "domain": "cyrus_one",
   "name": "Cyrus ONE",
-  "codeowners": [
-    "@vitkuv"
-  ],
-  "config_flow": true,
-  "documentation": "https://github.com/vitkuv/cyrus-one-hass",
-  "iot_class": "local_push",
-  "integration_type": "device",
-  "issue_tracker": "https://github.com/vitkuv/cyrus-one-hass/issues",
   "bluetooth": [
     {
       "local_name": "ONE-*"
     }
   ],
+  "codeowners": [
+    "@vitkuv"
+  ],
+  "config_flow": true,
   "dependencies": [
     "bluetooth_adapters"
   ],
+  "documentation": "https://github.com/vitkuv/cyrus-one-hass",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/vitkuv/cyrus-one-hass/issues",
   "requirements": [
     "bleak-retry-connector"
   ],
