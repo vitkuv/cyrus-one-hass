@@ -411,6 +411,18 @@ wheels = [
 ]
 
 [[package]]
+name = "aiousbwatcher"
+version = "1.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asyncinotify" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3a/fc/b358b2ed4115d0c93f44e737191517bc0973f9d101ad20f03f5b6cf77e17/aiousbwatcher-1.1.2.tar.gz", hash = "sha256:908919fed3b5d6b5b0a26f7aea82a5f45c6a6205789dcb39348abc34a4f06ebe", size = 6726, upload-time = "2026-04-21T06:59:13.222Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ee/b3/cff0d63850c759a12924cadaa99ce93df53f997d6a19acf8162139bce071/aiousbwatcher-1.1.2-py3-none-any.whl", hash = "sha256:66399f3e5e65271722a20df19add1a0731875560a1108be1fd632096a20a84cf", size = 5052, upload-time = "2026-04-21T06:59:11.71Z" },
+]
+
+[[package]]
 name = "aiozoneinfo"
 version = "0.2.3"
 source = { registry = "https://pypi.org/simple" }
@@ -536,6 +548,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a5/ae/136395dfbfe00dfc94da3f3e136d0b13f394cba8f4841120e34226265780/async_timeout-5.0.1.tar.gz", hash = "sha256:d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3", size = 9274, upload-time = "2024-11-06T16:41:39.6Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/ba/e2081de779ca30d473f21f5b30e0e737c438205440784c7dfc81efc2b029/async_timeout-5.0.1-py3-none-any.whl", hash = "sha256:39e3809566ff85354557ec2398b55e096c8364bacac9405a7a1fa429e77fe76c", size = 6233, upload-time = "2024-11-06T16:41:37.9Z" },
+]
+
+[[package]]
+name = "asyncinotify"
+version = "4.4.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/23/90/f04f0a0c2001e43b3b5199ef6c63c117e43e80cdbaab3037b24c57feeef5/asyncinotify-4.4.4.tar.gz", hash = "sha256:a8afc92bec6666807ca50524156fca22655325cba6e2b51d842b8ec0d399c708", size = 20868, upload-time = "2026-04-13T20:32:27.416Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/41/31/0ac34c340f517a06cf944c2b4a518c53addf5663df7c704ee711b5e5c662/asyncinotify-4.4.4-py3-none-any.whl", hash = "sha256:9f4236249d78af4451eb689d0c1ed1f52ab5d44a22c7dd699f3dd34f2c3e01f4", size = 20225, upload-time = "2026-04-13T20:32:26.184Z" },
 ]
 
 [[package]]
@@ -1209,6 +1230,7 @@ source = { virtual = "." }
 dev = [
     { name = "aioesphomeapi", version = "44.19.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.14.2'" },
     { name = "aioesphomeapi", version = "45.3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.14.2'" },
+    { name = "aiousbwatcher" },
     { name = "bleak-retry-connector" },
     { name = "homeassistant", version = "2026.2.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.14.2'" },
     { name = "homeassistant", version = "2026.6.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.14.2'" },
@@ -1229,6 +1251,7 @@ dev = [
 [package.metadata.requires-dev]
 dev = [
     { name = "aioesphomeapi", specifier = ">=44.19.0" },
+    { name = "aiousbwatcher", specifier = ">=1.1.2" },
     { name = "bleak-retry-connector", specifier = ">=4.6.1" },
     { name = "homeassistant", specifier = ">=2026.2.0" },
     { name = "pre-commit", specifier = ">=4.0" },

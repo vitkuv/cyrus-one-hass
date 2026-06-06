@@ -18,6 +18,7 @@ dev = [
     "pytest-asyncio>=0.24",
     "pytest-homeassistant-custom-component>=0.13",
     "serialx",
+    "aiousbwatcher>=1.1.2",
 ]
 
 [tool.pytest.ini_options]
