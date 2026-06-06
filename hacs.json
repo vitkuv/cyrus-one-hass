@@ -2,5 +2,7 @@
   "name": "Cyrus ONE",
   "homeassistant": "2026.1.0",
   "hacs": "2.0.0",
-  "country": ["GB"]
+  "render_readme": true,
+  "zip_release": true,
+  "filename": "cyrus_one.zip"
 }
