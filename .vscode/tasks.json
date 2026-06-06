@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+        {
+        "label": "Run Home Assistant Core",
+        "type": "shell",
+        "command": "uv run hass -c ./config",
+        "presentation": {
+            "reveal": "always",
+            "panel": "new"
+        },
+        "problemMatcher": [],
+        }
+    ]
+}

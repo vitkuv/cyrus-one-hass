@@ -1,0 +1,83 @@
+[project]
+name = "cyrus-one-hass"
+version = "0.1.0"
+description = "Cyrus ONE Home Assistant integration"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "aioesphomeapi>=44.19.0",
+    "bleak-retry-connector>=4.6.1",
+    "homeassistant>=2026.2.0",
+    "pre-commit>=4.0",
+    "ruff>=0.15.15",
+    "pytest-cov>=6.0",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-homeassistant-custom-component>=0.13",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+indent-width = 4
+lint.select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+    "ANN",
+    "N",
+    "D",
+]
+
+lint.ignore = [
+    "E501",
+    "ANN002",
+    "ANN003",
+    "ANN201",
+    "ANN202",
+    "ANN204",
+    "D100",
+    "D102",
+    "D104",
+    "D105",
+    "D205",
+    "D212",
+    "D101",
+    "D103",
+    "D106",
+    "D107",
+    "D203",
+]
+
+exclude = [
+    ".git",
+    "__pycache__",
+    "venv",
+    "build",
+    "dist",
+    "*.pyc",
+    "*.egg-info",
+]
+lint.fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+"tests/*.py" = ["ANN", "D"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false

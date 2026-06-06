@@ -1,0 +1,9 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+logger:
+  default: warn
+  logs:
+    custom_components.cyrus_one: debug
+

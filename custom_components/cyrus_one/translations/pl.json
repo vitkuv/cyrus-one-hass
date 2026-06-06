@@ -1,0 +1,15 @@
+{
+  "config": {
+    "flow_title": "Cyrus One ({name})",
+    "step": {
+      "discovery_confirm": {
+        "title": "Dodaj Cyrus One ({name})",
+        "description": "Czy chcesz rozpocząć konfigurację?"
+      }
+    },
+    "abort": {
+      "already_configured": "Urządzenie jest już skonfigurowane",
+      "manual_not_supported": "Urządzenie zostanie wykryte automatycznie przez Bluetooth."
+    }
+  }
+}
