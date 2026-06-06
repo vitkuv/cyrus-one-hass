@@ -1,3 +1,4 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
 # Cyrus ONE
 
 Home Assistant integration for controlling **Cyrus ONE** and **Cyrus ONE HD** amplifiers over Bluetooth Low Energy (BLE). 
