@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.1...v1.0.2) (2026-06-07)
+
+
+### Bug Fixes
+
+* Disable balance for AV source when AV Direct enabled ([1f36a63](https://github.com/vitkuv/cyrus-one-hass/commit/1f36a6317e439caca00a643c330b25ba1ad4a559))
+* Tests fixed ([9898c03](https://github.com/vitkuv/cyrus-one-hass/commit/9898c037756e1c1790c7381462615d16625e9a17))
+
 ## [1.0.1](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.0...v1.0.1) (2026-06-06)
 
 
