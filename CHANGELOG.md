@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.2...v1.0.3) (2026-06-07)
+
+
+### Bug Fixes
+
+* Cosmetic changes to create a new release. ([5c8ff0a](https://github.com/vitkuv/cyrus-one-hass/commit/5c8ff0a54b230fd29880996067658083e1314ee5))
+
 ## [1.0.2](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.1...v1.0.2) (2026-06-07)
 
 
