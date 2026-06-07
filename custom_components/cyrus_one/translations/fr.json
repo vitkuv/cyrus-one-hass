@@ -3,13 +3,13 @@
     "flow_title": "Cyrus One ({name})",
     "step": {
       "discovery_confirm": {
-        "title": "Cyrus One ({name}) hinzufügen",
-        "description": "Möchten Sie die Einrichtung starten?"
+        "title": "Ajouter Cyrus One ({name})",
+        "description": "Voulez-vous commencer la configuration?"
       }
     },
     "abort": {
-      "already_configured": "Gerät ist bereits konfiguriert",
-      "manual_not_supported": "Das Gerät wird automatisch über Bluetooth erkannt."
+      "already_configured": "L'appareil est déjà configuré",
+      "manual_not_supported": "L'appareil sera découvert automatiquement via Bluetooth."
     }
   },
   "entity": {
@@ -20,15 +20,15 @@
     },
     "binary_sensor": {
       "headphones": {
-        "name": "Kopfhörer"
+        "name": "Casque"
       }
     },
     "button": {
       "brightness_up": {
-        "name": "Helligkeit erhöhen"
+        "name": "Augmenter la luminosité"
       },
       "brightness_down": {
-        "name": "Helligkeit verringern"
+        "name": "Diminuer la luminosité"
       }
     }
   }

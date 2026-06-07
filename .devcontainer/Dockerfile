@@ -10,6 +10,4 @@ ENV UV_LINK_MODE=copy
 RUN groupadd --system $USER && \
     useradd --system --create-home --gid $USER $USER
 
-# RUN adduser -D $USER
-
 RUN pip install uv

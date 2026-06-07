@@ -11,5 +11,25 @@
       "already_configured": "Пристрій вже налаштовано",
       "manual_not_supported": "Пристрій буде виявлено автоматично через Bluetooth."
     }
+  },
+  "entity": {
+    "number": {
+      "balance": {
+        "name": "Баланс"
+      }
+    },
+    "binary_sensor": {
+      "headphones": {
+        "name": "Навушники"
+      }
+    },
+    "button": {
+      "brightness_up": {
+        "name": "Збільшити яскравість"
+      },
+      "brightness_down": {
+        "name": "Зменшити яскравість"
+      }
+    }
   }
 }

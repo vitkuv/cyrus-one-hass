@@ -1,0 +1,35 @@
+{
+  "config": {
+    "flow_title": "Cyrus One ({name})",
+    "step": {
+      "discovery_confirm": {
+        "title": "Adicionar Cyrus One ({name})",
+        "description": "Deseja iniciar a configuração?"
+      }
+    },
+    "abort": {
+      "already_configured": "O dispositivo já está configurado",
+      "manual_not_supported": "O dispositivo será descoberto automaticamente via Bluetooth."
+    }
+  },
+  "entity": {
+    "number": {
+      "balance": {
+        "name": "Balanço"
+      }
+    },
+    "binary_sensor": {
+      "headphones": {
+        "name": "Fones de ouvido"
+      }
+    },
+    "button": {
+      "brightness_up": {
+        "name": "Aumentar brilho"
+      },
+      "brightness_down": {
+        "name": "Diminuir brilho"
+      }
+    }
+  }
+}

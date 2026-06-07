@@ -23,7 +23,8 @@ class BalanceNumber(CyrusOneCoordinatorEntity, NumberEntity):
     _attr_device_class = NumberDeviceClass.SOUND_PRESSURE
     _attr_unique_id_suffix = "_balance"
     _attr_icon = "mdi:tune"
-    _attr_name = "Balance"
+    _attr_has_entity_name = True
+    _attr_translation_key = "balance"
     _attr_native_min_value = 0.0
     _attr_native_max_value = 20.0
     _attr_native_step = 1.0

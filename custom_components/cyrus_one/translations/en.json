@@ -11,5 +11,25 @@
       "already_configured": "Service is already configured",
       "manual_not_supported": "The device will be discovered automatically via Bluetooth."
     }
+  },
+  "entity": {
+    "number": {
+      "balance": {
+        "name": "Balance"
+      }
+    },
+    "binary_sensor": {
+      "headphones": {
+        "name": "Headphones"
+      }
+    },
+    "button": {
+      "brightness_up": {
+        "name": "Brightness Up"
+      },
+      "brightness_down": {
+        "name": "Brightness Down"
+      }
+    }
   }
 }

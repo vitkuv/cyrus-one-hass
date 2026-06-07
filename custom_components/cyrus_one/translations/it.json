@@ -11,5 +11,25 @@
       "already_configured": "Il dispositivo è già configurato",
       "manual_not_supported": "Il dispositivo verrà rilevato automaticamente via Bluetooth."
     }
+  },
+  "entity": {
+    "number": {
+      "balance": {
+        "name": "Bilanciamento"
+      }
+    },
+    "binary_sensor": {
+      "headphones": {
+        "name": "Cuffie"
+      }
+    },
+    "button": {
+      "brightness_up": {
+        "name": "Aumenta luminosità"
+      },
+      "brightness_down": {
+        "name": "Riduci luminosità"
+      }
+    }
   }
 }

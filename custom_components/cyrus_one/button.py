@@ -26,7 +26,8 @@ class BrightnessUpButton(CyrusOneCoordinatorEntity, ButtonEntity):
     _attr_entity_category = EntityCategory.CONFIG
     _attr_unique_id_suffix = "brightness_up"
     _attr_icon = "mdi:brightness-7"
-    _attr_name = "Brightness Up"
+    _attr_has_entity_name = True
+    _attr_translation_key = "brightness_up"
 
     async def async_press(self) -> None:
         await self.coordinator.set_brightness_up()
@@ -36,7 +37,8 @@ class BrightnessDownButton(CyrusOneCoordinatorEntity, ButtonEntity):
     _attr_entity_category = EntityCategory.CONFIG
     _attr_unique_id_suffix = "brightness_down"
     _attr_icon = "mdi:brightness-4"
-    _attr_name = "Brightness Down"
+    _attr_has_entity_name = True
+    _attr_translation_key = "brightness_down"
 
     async def async_press(self) -> None:
         await self.coordinator.set_brightness_down()
