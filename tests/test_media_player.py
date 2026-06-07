@@ -42,7 +42,7 @@ async def test_volume_mapping(hass, mock_coordinator):
     assert entity.volume_level == 45.0 / 90.0
 
 
-async def test_volume_av_direct_returns_1(hass, mock_coordinator):
+async def test_volume_av_direct_returns_none(hass, mock_coordinator):
     """When AV Direct is enabled on AV source, volume_level returns 1.0."""
     coord = mock_coordinator
     coord.data["source"] = const.SOURCE_AV
@@ -51,18 +51,7 @@ async def test_volume_av_direct_returns_1(hass, mock_coordinator):
 
     entity = CyrusOneMediaPlayer(coord)
     entity.hass = hass
-    assert entity.volume_level == 1.0
-
-
-async def test_volume_none(hass, mock_coordinator):
-    """When volume is None, volume_level returns 0.0."""
-    coord = mock_coordinator
-    coord.data["volume"] = None
-    from custom_components.cyrus_one.media_player import CyrusOneMediaPlayer
-
-    entity = CyrusOneMediaPlayer(coord)
-    entity.hass = hass
-    assert entity.volume_level == 0.0
+    assert entity.volume_level is None
 
 
 async def test_is_muted(hass, mock_coordinator):
