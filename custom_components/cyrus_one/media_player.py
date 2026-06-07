@@ -51,11 +51,11 @@ class CyrusOneMediaPlayer(CyrusOneCoordinatorEntity, MediaPlayerEntity):
     @property
     def volume_level(self) -> float | None:
         if self.is_volume_disabled:
-            return 1.0
+            return None
 
         vol = self.coordinator.data.get("volume")
         if vol is None:
-            return 0.0
+            return None
         return max(0, min(90, vol)) / 90.0
 
     async def async_mute_volume(self, mute: bool) -> None:
@@ -66,7 +66,6 @@ class CyrusOneMediaPlayer(CyrusOneCoordinatorEntity, MediaPlayerEntity):
 
     async def async_set_volume_level(self, volume: float) -> None:
         if self.is_volume_disabled:
-            self.async_write_ha_state()
             return
 
         vol = round(max(0.0, min(1.0, volume)) * 90)
