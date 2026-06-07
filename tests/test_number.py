@@ -1,5 +1,7 @@
 """Tests for BalanceNumber entity."""
 
+from custom_components.cyrus_one import const
+
 
 async def test_native_value(hass, mock_coordinator):
     """native_value returns balance as float."""
@@ -45,6 +47,17 @@ async def test_unavailable_headphones(hass, mock_coordinator):
     """Available is False when headphones are connected."""
     coord = mock_coordinator
     coord.data["is_headphones_connected"] = True
+    from custom_components.cyrus_one.number import BalanceNumber
+
+    entity = BalanceNumber(coord)
+    assert entity.available is False
+
+
+async def test_unavailable_av_direct(hass, mock_coordinator):
+    """Available is False when AV source selected and AV Direct enabled."""
+    coord = mock_coordinator
+    coord.data["source"] = const.SOURCE_AV
+    coord.data["is_av_direct_enabled"] = True
     from custom_components.cyrus_one.number import BalanceNumber
 
     entity = BalanceNumber(coord)

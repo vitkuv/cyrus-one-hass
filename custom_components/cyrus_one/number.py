@@ -30,7 +30,17 @@ class BalanceNumber(CyrusOneCoordinatorEntity, NumberEntity):
 
     @property
     def available(self):
-        return super().available and not self.coordinator.data.get("is_headphones_connected")
+        if not self.coordinator.available:
+            return False
+
+        data = self.coordinator.data
+        if data.get("is_headphones_connected"):
+            return False
+
+        if data.get("source") == const.SOURCE_AV and data.get("is_av_direct_enabled"):
+            return False
+
+        return True
 
     @property
     def native_value(self) -> float | None:
