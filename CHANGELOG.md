@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.3...v1.0.4) (2026-06-09)
+
+
+### Bug Fixes
+
+* Fixed source names for Cyrus ONE HD model ([59ebe3a](https://github.com/vitkuv/cyrus-one-hass/commit/59ebe3a7f06b6ec9ae0501d6656e38b2d677f344))
+* Volume control is adapted to the non-linear characteristic of Cyrus. ([10b14df](https://github.com/vitkuv/cyrus-one-hass/commit/10b14dfd2993b27c66649346fa88efad09cba485))
+
 ## [1.0.3](https://github.com/vitkuv/cyrus-one-hass/compare/v1.0.2...v1.0.3) (2026-06-07)
 
 

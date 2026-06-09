@@ -1,6 +1,6 @@
 [project]
 name = "cyrus-one-hass"
-version = "1.0.3"
+version = "1.0.4"
 description = "Cyrus ONE Home Assistant integration"
 readme = "README.md"
 requires-python = ">=3.14"
