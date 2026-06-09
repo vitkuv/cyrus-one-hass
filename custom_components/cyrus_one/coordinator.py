@@ -5,7 +5,7 @@ from time import monotonic
 from typing import TypedDict
 
 from bleak import BleakClient, BleakGATTCharacteristic, BLEDevice
-from bleak.exc import BleakError
+from bleak.exc import PROTOCOL_ERROR_CODES, BleakError
 from bleak_retry_connector import BleakClientWithServiceCache, establish_connection
 from homeassistant.components import bluetooth
 from homeassistant.config_entries import ConfigEntry
@@ -16,7 +16,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity, DataUpda
 
 from . import const
 
-BLEAK_UNLIKELY_ERROR = "Unlikely error"
+GATT_UNLIKELY_ERROR = PROTOCOL_ERROR_CODES[14].lower()
 
 
 def format_bytes(data: bytes) -> str:
@@ -37,7 +37,7 @@ class CyrusOneState(TypedDict):
 
 
 class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
-    initialization_delay = 0.3
+    initialization_delay = const.BLE_COMMANDS_DELAY * 2
 
     def __init__(
         self, hass: HomeAssistant, logger: logging.Logger, config_entry: ConfigEntry
@@ -46,7 +46,7 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
             hass,
             logger,
             config_entry=config_entry,
-            name=f"Cyrus {config_entry.data[const.CONF_BLE_NAME]} Coordinator",
+            name=f"Cyrus {config_entry.data[const.CONF_BLE_NAME]} coordinator",
             update_interval=None,
         )
         self.data = {"source_list": ()}
@@ -91,7 +91,7 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
                 bluetooth.BluetoothScanningMode.ACTIVE,
             )
         )
-        self.logger.debug(f"Coordinator for {self.config_entry.data[const.CONF_BLE_NAME]} started")
+        self.logger.debug(f"{self.name} started")
 
     @callback
     def _handle_device_discovered(
@@ -108,7 +108,7 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
         self.config_entry.async_create_background_task(
             self.hass,
             self.connect(service_info.device),
-            name=f"{self.name} - {self.config_entry.title} - connect",
+            name=f"{self.name} - {service_info.address} - connect",
             eager_start=False,
         )
 
@@ -125,10 +125,9 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
                 self._ble_client = await establish_connection(
                     BleakClientWithServiceCache,
                     ble_device,
-                    name=f"Cyrus {ble_device.address} establish connection",
+                    name=f"{self.name} {ble_device.address} establish connection",
                     disconnected_callback=self._handle_device_disconnected,
-                    use_services_cache=True,
-                    max_attempts=2,
+                    max_attempts=1,
                 )
             except BleakError as err:
                 self.logger.info(f"Connection failed: {err}")
@@ -143,7 +142,7 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
     async def async_shutdown(self) -> None:
         await super().async_shutdown()
         await self.disconnect()
-        self.logger.debug(f"Coordinator for {self.config_entry.data[const.CONF_BLE_NAME]} stopped")
+        self.logger.debug(f"{self.name} stopped")
 
     async def disconnect(self) -> None:
         self._disconnect_requested = True
@@ -155,10 +154,9 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
             if ble_client and ble_client.is_connected:
                 self.logger.debug(f"Disconnecting from {ble_client.address}")
                 try:
-                    await ble_client.stop_notify(const.GATT_DATA_CHARACTERISTIC_UUID)
                     await ble_client.disconnect()
                 except BleakError as err:
-                    self.logger.warning(f"Error while disconnecting: {err}")
+                    self.logger.warning(f"Disconnecting error: {err}")
 
     def _handle_device_disconnected(self, ble_client: BleakClient) -> None:
         self.logger.debug(f"Disconnected from {ble_client.address}")
@@ -258,7 +256,7 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
             self.logger.debug(f"Sending GATT char: {char}, message: {format_bytes(message)}")
 
             if not self.is_connected:
-                self.logger.debug("Device was disconnected, GATT message will be ignored")
+                self.logger.debug("Device disconnected, GATT message dropped")
                 return
 
             delta = monotonic() - self._ble_last_command_sent_time
@@ -268,9 +266,10 @@ class CyrusOneCoordinator(DataUpdateCoordinator[CyrusOneState]):
             try:
                 await self._ble_client.write_gatt_char(char, message, response=True)
             except BleakError as err:
-                if BLEAK_UNLIKELY_ERROR not in str(err):
+                # NOTE: Due to MTU negotiation bug, Cyrus returns error 14 (Unlikely error). But everything works as expected. So we can ignore it.
+                if GATT_UNLIKELY_ERROR not in str(err).lower():
                     self.logger.exception(
-                        f"Error for sending GATT char: {char}, message: {format_bytes(message)}"
+                        f"GATT write error, char: {char}, message: {format_bytes(message)}"
                     )
             self._ble_last_command_sent_time = monotonic()
 

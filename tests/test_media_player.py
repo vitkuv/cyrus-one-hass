@@ -2,6 +2,7 @@
 
 from unittest.mock import MagicMock
 
+import pytest
 from homeassistant.components.media_player import (
     MediaPlayerEntityFeature,
     MediaPlayerState,
@@ -32,14 +33,14 @@ async def test_state_none_when_unavailable(hass, mock_coordinator):
 
 
 async def test_volume_mapping(hass, mock_coordinator):
-    """Volume 45 is mapped to 0.5."""
+    """Volume 20 is approximated to HA 0.05."""
     coord = mock_coordinator
-    coord.data["volume"] = 45
+    coord.data["volume"] = 20
     from custom_components.cyrus_one.media_player import CyrusOneMediaPlayer
 
     entity = CyrusOneMediaPlayer(coord)
     entity.hass = hass
-    assert entity.volume_level == 45.0 / 90.0
+    assert entity.volume_level == pytest.approx(0.05, abs=0.01)
 
 
 async def test_volume_av_direct_returns_none(hass, mock_coordinator):
@@ -100,8 +101,7 @@ async def test_set_volume_calls_coordinator(hass, mock_coordinator):
 
     entity = CyrusOneMediaPlayer(coord)
     await entity.async_set_volume_level(0.5)
-    expected_vol = round(0.5 * 90)
-    coord.set_volume.assert_awaited_once_with(expected_vol)
+    coord.set_volume.assert_awaited_once_with(69)
 
 
 async def test_set_volume_disabled_av_direct(hass, mock_coordinator):

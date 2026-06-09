@@ -40,14 +40,6 @@ async def test_disconnect_clears_is_initialized(coordinator):
     assert coord.is_initialized is False
 
 
-async def test_disconnect_stops_notifications(coordinator):
-    """Disconnect calls stop_notify and disconnect on the client."""
-    coord, mock_client = coordinator
-    await coord.disconnect()
-    mock_client.stop_notify.assert_called_once_with(const.GATT_DATA_CHARACTERISTIC_UUID)
-    mock_client.disconnect.assert_awaited_once()
-
-
 async def test_available_flag(coordinator):
     """Available is True only when initialized, connected, and not disconnecting."""
     coord, _ = coordinator

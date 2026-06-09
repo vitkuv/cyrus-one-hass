@@ -1,3 +1,5 @@
+import math
+
 from homeassistant.components.media_player import (
     MediaPlayerDeviceClass,
     MediaPlayerEntity,
@@ -50,13 +52,13 @@ class CyrusOneMediaPlayer(CyrusOneCoordinatorEntity, MediaPlayerEntity):
 
     @property
     def volume_level(self) -> float | None:
-        if self.is_volume_disabled:
+        vol = self.coordinator.data.get("volume")
+        if vol is None or self.is_volume_disabled:
             return None
 
-        vol = self.coordinator.data.get("volume")
-        if vol is None:
-            return None
-        return max(0, min(90, vol)) / 90.0
+        return (const.VOLUME_CURVE_FACTOR ** (vol / const.VOLUME_MAX_VALUE) - 1.0) / (
+            const.VOLUME_CURVE_FACTOR - 1.0
+        )
 
     async def async_mute_volume(self, mute: bool) -> None:
         await self.coordinator.set_mute(mute)
@@ -68,8 +70,12 @@ class CyrusOneMediaPlayer(CyrusOneCoordinatorEntity, MediaPlayerEntity):
         if self.is_volume_disabled:
             return
 
-        vol = round(max(0.0, min(1.0, volume)) * 90)
-        await self.coordinator.set_volume(vol)
+        target_vol = max(0.0, min(1.0, volume))
+
+        ratio = target_vol * (const.VOLUME_CURVE_FACTOR - 1.0) + 1.0
+        vol = const.VOLUME_MAX_VALUE * (math.log(ratio) / math.log(const.VOLUME_CURVE_FACTOR))
+
+        await self.coordinator.set_volume(int(round(vol)))
 
     @property
     def supported_features(self) -> MediaPlayerEntityFeature:

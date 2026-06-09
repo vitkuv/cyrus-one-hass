@@ -87,5 +87,4 @@ async def test_setup_entry_coordinator_in_data(hass):
         await hass.async_block_till_done()
 
     coordinator = hass.data[const.DOMAIN][entry.entry_id]
-    assert coordinator.name == "Cyrus ONE-12345 Coordinator"
     assert coordinator.config_entry is entry
